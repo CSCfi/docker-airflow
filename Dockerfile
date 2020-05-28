@@ -1,11 +1,12 @@
 # VERSION 1.10.1
-# AUTHOR: Matthieu "Puckel_" Roisil
-# DESCRIPTION: Basic Airflow container
+# ORIGINAL_AUTHOR: Matthieu "Puckel_" Roisil
+# MODIFIED_BY: DA
+# DESCRIPTION: Basic Airflow container, tweaked to run on Openshift
 # BUILD: docker build --rm -t puckel/docker-airflow .
 # SOURCE: https://github.com/puckel/docker-airflow
 
 FROM python:3.6-slim
-LABEL maintainer="Puckel_"
+LABEL maintainer="DA"
 
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive

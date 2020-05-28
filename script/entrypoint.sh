@@ -31,6 +31,11 @@ then
   AIRFLOW__CORE__LOAD_EXAMPLES=False
 fi
 
+if [[ -z "$PIP_REQUIREMENTS" ]]
+then
+    echo "Installing pip requirements provided as a list"
+    $(which pip) install --user $PIP_REQUIREMENTS
+fi
 # Install custom python package if requirements.txt is present
 if [ -e "/requirements.txt" ]; then
     $(which pip) install --user -r /requirements.txt
