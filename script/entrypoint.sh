@@ -31,7 +31,7 @@ then
   AIRFLOW__CORE__LOAD_EXAMPLES=False
 fi
 
-if [[ -z "$PIP_REQUIREMENTS" ]]
+if [[ -n "$PIP_REQUIREMENTS" ]]
 then
     echo "Installing pip requirements provided as a list"
     $(which pip) install --user $PIP_REQUIREMENTS
