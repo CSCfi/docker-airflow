@@ -23,6 +23,8 @@ export \
   AIRFLOW__CORE__FERNET_KEY \
   AIRFLOW__CORE__LOAD_EXAMPLES \
   AIRFLOW__CORE__SQL_ALCHEMY_CONN \
+  AIRFLOW__WEBSERVER__AUTHENTICATE \
+  AIRFLOW__WEBSERVER__AUTH_BACKEND \
 
 
 # Load DAGs exemples (default: Yes)
@@ -61,6 +63,10 @@ wait_for_port() {
   done
 }
 
+# Enable authentication
+AIRFLOW__WEBSERVER__AUTHENTICATE=True
+AIRFLOW__WEBSERVER__AUTH_BACKEND="airflow.contrib.auth.backends.password_auth"
+
 if [ "$AIRFLOW__CORE__EXECUTOR" != "SequentialExecutor" ]; then
   AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB"
   AIRFLOW__CELERY__RESULT_BACKEND="db+postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB"
@@ -82,6 +88,7 @@ fi
 case "$1" in
   webserver)
     airflow initdb
+    python /create_user.py $AUTHENTICATION_USERNAME $AUTHENTICATION_EMAIL $AUTHENTICATION_PASSWORD
     if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
       # With the "Local" executor it should all run in one container.
       airflow scheduler &
