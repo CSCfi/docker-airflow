@@ -88,7 +88,7 @@ fi
 case "$1" in
   webserver)
     airflow initdb
-    python /create_user.py $AUTHENTICATION_USERNAME $AUTHENTICATION_EMAIL $AUTHENTICATION_PASSWORD
+    python /create_user.py $AUTHENTICATION_USERNAME $AUTHENTICATION_PASSWORD
     if [ "$AIRFLOW__CORE__EXECUTOR" = "LocalExecutor" ]; then
       # With the "Local" executor it should all run in one container.
       airflow scheduler &
