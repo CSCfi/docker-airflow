@@ -6,13 +6,12 @@ import sys
 # Creates a user to login into the Airflow UI
 # Uses command line arguments to configure the user:
 #   1st arg: username
-#   2nd arg: email
-#   3rd arg: password
+#   2nd arg: password
 
 user = PasswordUser(models.User())
 user.username = sys.argv[1]
-user.email = sys.argv[2]
-user.password = sys.argv[3]
+user.password = sys.argv[2]
+user.superuser = True
 session = settings.Session()
 session.add(user)
 session.commit()
