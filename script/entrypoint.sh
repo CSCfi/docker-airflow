@@ -90,6 +90,9 @@ if ! whoami &> /dev/null; then
   fi
 fi
 
+# Copy log cleaning dag to the dags folder
+cp /tmp/airflow-log-cleanup.py ${AIRFLOW_HOME}/dags/
+
 case "$1" in
   webserver)
     airflow initdb

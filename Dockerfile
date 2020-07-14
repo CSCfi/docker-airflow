@@ -75,6 +75,7 @@ RUN set -ex \
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
 COPY script/create_user.py /create_user.py
+COPY dags/airflow-log-cleanup.py /tmp/airflow-log-cleanup.py
 
 RUN chown -R airflow: ${AIRFLOW_HOME}
 RUN mkdir -p ${AIRFLOW_HOME}/logs \
@@ -87,7 +88,7 @@ RUN mkdir -p ${AIRFLOW_HOME}/logs \
 EXPOSE 8080 5555 8793
 
 WORKDIR ${AIRFLOW_HOME}
-ENV AIRFLOW_HOME = ${AIRFLOW_HOME}
+ENV AIRFLOW_HOME ${AIRFLOW_HOME}
 USER airflow
 
 ENTRYPOINT ["/entrypoint.sh"]
