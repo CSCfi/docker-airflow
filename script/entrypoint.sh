@@ -91,9 +91,6 @@ if ! whoami &> /dev/null; then
   fi
 fi
 
-# Copy log cleaning dag to the dags folder
-cp /tmp/airflow-log-cleanup.py ${AIRFLOW_HOME}/dags/
-
 # Change default logging configuration to custom configuration
 export PYTHONPATH=${AIRFLOW_HOME}
 AIRFLOW__CORE__LOGGING_CONFIG_CLASS=logging_config.LOGGING_CONFIG
