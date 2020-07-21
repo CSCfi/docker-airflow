@@ -30,6 +30,7 @@ export \
   AIRFLOW__CORE__SQL_ALCHEMY_CONN \
   AIRFLOW__WEBSERVER__AUTHENTICATE \
   AIRFLOW__WEBSERVER__AUTH_BACKEND \
+  AIRFLOW__CORE__LOGGING_CONFIG_CLASS
 
 
 # Load DAGs exemples (default: Yes)
@@ -92,6 +93,10 @@ fi
 
 # Copy log cleaning dag to the dags folder
 cp /tmp/airflow-log-cleanup.py ${AIRFLOW_HOME}/dags/
+
+# Change default logging configuration to custom configuration
+export PYTHONPATH=${AIRFLOW_HOME}
+AIRFLOW__CORE__LOGGING_CONFIG_CLASS=logging_config.LOGGING_CONFIG
 
 case "$1" in
   webserver)
