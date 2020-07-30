@@ -120,13 +120,11 @@ FIND_STATEMENT="find ${CHILD_PROCESS_LOG_DIRECTORY}/*/* -type f -mtime +${MAX_LO
 DELETE_STMT="${FIND_STATEMENT} -exec rm -f {} \;"
 
 cleanup "${FIND_STATEMENT}" "${DELETE_STMT}"
-CLEANUP_EXIT_CODE=$?
 
 FIND_STATEMENT="find ${CHILD_PROCESS_LOG_DIRECTORY}/* -type d -empty"
 DELETE_STMT="${FIND_STATEMENT} -prune -exec rm -rf {} \;"
 
 cleanup "${FIND_STATEMENT}" "${DELETE_STMT}"
-CLEANUP_EXIT_CODE=$?
 
 echo "Finished Running Cleanup Process"
 """
