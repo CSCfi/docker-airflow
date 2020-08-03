@@ -101,6 +101,20 @@ case "$1" in
       # With the "Local" executor it should all run in one container.
       airflow scheduler &
     fi
+
+    # Create connection to Airflow metadatabase
+    # Delete default connection that has wrong configuration
+    airflow connections -d --conn_id airflow_db
+    # Create new connection
+    airflow connections -a \
+      --conn_id airflow_db \
+      --conn_type postgres \
+      --conn_host ${POSTGRES_HOST} \
+      --conn_login ${POSTGRES_USER} \
+      --conn_password ${POSTGRES_PASSWORD} \
+      --conn_schema ${POSTGRES_DB} \
+      --conn_port 5432
+
     exec airflow webserver
     ;;
   worker|scheduler)
