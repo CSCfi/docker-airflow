@@ -1,4 +1,4 @@
-# VERSION 1.10.1
+# VERSION 1.10.13
 # ORIGINAL_AUTHOR: Matthieu "Puckel_" Roisil
 # MODIFIED_BY: DA
 # DESCRIPTION: Basic Airflow container, tweaked to run on Openshift
@@ -13,7 +13,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.10
+ARG AIRFLOW_VERSION=1.10.13
 ARG AIRFLOW_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
